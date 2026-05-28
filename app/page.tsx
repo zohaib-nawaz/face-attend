@@ -70,7 +70,7 @@ export default function Home() {
             </div>
 
             <h1 className="mt-4 text-balance text-3xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
-              Secure, real-time attendance—powered by{" "}
+              Secure, real-time attendance, powered by{" "}
               <span className="bg-linear-to-r from-indigo-600 via-sky-600 to-cyan-600 bg-clip-text text-transparent">
                 face recognition
               </span>

@@ -197,7 +197,7 @@ export function LiveFeedCard({
     liveFeed.streamStatus === "active" ? "bg-rose-500" : "bg-slate-400";
 
   return (
-    <section className="rounded-xl border border-slate-200 bg-white p-5">
+    <section className="flex flex-col rounded-xl border border-slate-200 bg-white p-5 lg:h-full lg:min-h-0">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <div className="text-sm font-semibold text-slate-900">
@@ -229,12 +229,9 @@ export function LiveFeedCard({
         </div>
       </div>
 
-      <div className="mt-5">
-        <div className="relative overflow-hidden rounded-xl bg-slate-100">
-          {/* Use an explicit height so the feed matches the design (and doesn't collapse). */}
-          <div className="relative h-[52vh] min-h-[320px] w-full sm:h-[540px] lg:h-[680px]">
-            <WebcamFaceMatcher className="absolute inset-0" />
-          </div>
+      <div className="mt-5 lg:flex lg:min-h-0 lg:flex-1">
+        <div className="relative w-full overflow-hidden rounded-xl bg-slate-100 aspect-video min-h-[260px] sm:min-h-[340px] lg:aspect-auto lg:min-h-0">
+          <WebcamFaceMatcher className="absolute inset-0" />
 
           <div className="absolute right-3 top-3 flex flex-col gap-2">
             <CameraOverlayButton label="Focus">

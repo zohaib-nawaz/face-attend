@@ -53,13 +53,13 @@ export default function LiveMonitorPage() {
       footer={<StatusBar stats={stats} uptimeLabel={uptimeLabel} latencyMs={latencyMs} />}
     >
       <FaceRecognitionProvider>
-        <div className="grid gap-4 lg:grid-cols-[1.65fr_1fr]">
+        <div className="flex flex-col gap-4 lg:grid lg:h-full lg:grid-cols-[1.65fr_1fr] lg:items-stretch">
           <LiveFeedCard
             liveFeed={liveFeed}
             timeZone={timeZone}
             onAttendanceCapture={handleAttendanceCapture}
           />
-          <div className="lg:sticky lg:top-6 lg:h-[calc(100vh-160px)]">
+          <div className="lg:h-full lg:min-h-0">
             <AttendancePanel timeZone={timeZone} liveItems={liveItems} />
           </div>
         </div>

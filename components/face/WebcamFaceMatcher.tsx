@@ -53,12 +53,8 @@ export function WebcamFaceMatcher({ className }: WebcamFaceMatcherProps) {
           className="pointer-events-none absolute inset-0 h-full w-full"
         />
 
-        <div className="absolute left-4 top-4 right-4 flex flex-wrap items-center justify-between gap-3">
-          <div className="rounded-lg bg-white/95 px-3 py-2 text-xs font-semibold backdrop-blur">
-            <span className={statusToneClassName}>{statusLabel}</span>
-          </div>
-
-          <div className="flex flex-wrap items-center justify-end gap-2">
+        <div className="absolute left-4 top-4 right-16 z-50 flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             {recognition.isCameraActive ? (
               <>
                 {recognition.isRecognitionActive ? (
@@ -98,6 +94,10 @@ export function WebcamFaceMatcher({ className }: WebcamFaceMatcherProps) {
               </Button>
             )}
           </div>
+
+          <div className="ml-auto rounded-lg bg-white/95 px-3 py-2 text-xs font-semibold backdrop-blur">
+            <span className={statusToneClassName}>{statusLabel}</span>
+          </div>
         </div>
 
         {recognition.state.status === "error" ? (
@@ -115,12 +115,13 @@ export function WebcamFaceMatcher({ className }: WebcamFaceMatcherProps) {
         {!recognition.isCameraActive && recognition.state.status !== "loading" ? (
           <div className="absolute inset-0 grid place-items-center p-6 text-center">
             <div className="max-w-md rounded-xl bg-white/95 p-5 text-sm text-slate-700 backdrop-blur">
-              <div className="font-semibold text-slate-900">Ready to match faces</div>
-              <p className="mt-2">
-                Add student images to <span className="font-mono">public/Faces</span>{" "}
-                and define them in{" "}
-                <span className="font-mono">public/Faces/knownFaces.json</span>.
+              <div className="text-base font-semibold text-slate-900">
+                Start a live session
+              </div>
+              <p className="mt-2 text-sm text-slate-600">
+                Turn on the camera to begin detection.
               </p>
+
               <div className="mt-4">
                 <Button
                   variant="secondary"
