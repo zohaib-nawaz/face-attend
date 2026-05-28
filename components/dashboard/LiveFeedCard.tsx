@@ -62,7 +62,17 @@ function IconSquareFocus() {
 export function LiveFeedCard({
   liveFeed,
   timeZone,
-}: Readonly<{ liveFeed: LiveFeed; timeZone: string }>) {
+  onAttendanceCapture,
+}: Readonly<{
+  liveFeed: LiveFeed;
+  timeZone: string;
+  onAttendanceCapture?: (capture: {
+    id: string;
+    label: string;
+    capturedAtIso: string | null;
+    photoUrl: string;
+  }) => void;
+}>) {
   const recognition = useFaceRecognitionSession();
   const verification = useFaceVerification(recognition.lastMatch, {
     requiredSamples: 10,
@@ -149,11 +159,36 @@ export function LiveFeedCard({
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
       const imageDataUrl = canvas.toDataURL("image/png");
-      await fetch("/api/captures", {
+      const res = await fetch("/api/captures", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ label, imageDataUrl }),
       });
+      let payload: unknown = null;
+      try {
+        payload = (await res.json()) as unknown;
+      } catch {
+        payload = null;
+      }
+
+      const data = payload as
+        | {
+            ok?: boolean;
+            fileName?: string;
+            publicPath?: string;
+            capturedAtIso?: string;
+            label?: string;
+          }
+        | null;
+
+      if (data?.ok && data.fileName && data.publicPath) {
+        onAttendanceCapture?.({
+          id: data.fileName,
+          label: data.label ?? label,
+          capturedAtIso: data.capturedAtIso ?? null,
+          photoUrl: data.publicPath,
+        });
+      }
       return;
     }
   };

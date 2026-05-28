@@ -1,14 +1,26 @@
 "use client";
 
 import { LiveFeedCard } from "@/components/dashboard/LiveFeedCard";
+import { AttendancePanel, type AttendanceItem } from "@/components/dashboard/AttendancePanel";
 import { StatusBar } from "@/components/dashboard/StatusBar";
 import { FaceRecognitionProvider } from "@/components/face/FaceRecognitionProvider";
 import { DashboardShell } from "@/components/layout/DashboardShell";
 import { useDashboardData } from "@/hooks/useDashboardData";
+import { useCallback, useMemo, useState } from "react";
 
 export default function LiveMonitorPage() {
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const dashboardState = useDashboardData();
+  const [liveAttendance, setLiveAttendance] = useState<AttendanceItem[]>([]);
+
+  const handleAttendanceCapture = useCallback((capture: AttendanceItem) => {
+    setLiveAttendance((current) => {
+      const next = [capture, ...current.filter((item) => item.id !== capture.id)];
+      return next.slice(0, 50);
+    });
+  }, []);
+
+  const liveItems = useMemo(() => liveAttendance, [liveAttendance]);
 
   if (dashboardState.status === "loading") {
     return (
@@ -41,7 +53,16 @@ export default function LiveMonitorPage() {
       footer={<StatusBar stats={stats} uptimeLabel={uptimeLabel} latencyMs={latencyMs} />}
     >
       <FaceRecognitionProvider>
-        <LiveFeedCard liveFeed={liveFeed} timeZone={timeZone} />
+        <div className="grid gap-4 lg:grid-cols-[1.65fr_1fr]">
+          <LiveFeedCard
+            liveFeed={liveFeed}
+            timeZone={timeZone}
+            onAttendanceCapture={handleAttendanceCapture}
+          />
+          <div className="lg:sticky lg:top-6 lg:h-[calc(100vh-160px)]">
+            <AttendancePanel timeZone={timeZone} liveItems={liveItems} />
+          </div>
+        </div>
       </FaceRecognitionProvider>
     </DashboardShell>
   );
