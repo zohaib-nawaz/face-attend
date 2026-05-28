@@ -6,9 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "download:face-models": "node scripts/download-face-models.mjs",
+    "generate:known-faces": "node scripts/generate-known-faces.mjs"
   },
   "dependencies": {
+    "face-api.js": "^0.22.2",
     "next": "16.2.4",
     "react": "19.2.4",
     "react-dom": "19.2.4"
