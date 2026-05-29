@@ -167,7 +167,7 @@ function ProductPreview() {
           <span className="size-3 rounded-full bg-emerald-400/80" />
           <div className="ml-3 hidden items-center gap-2 rounded-md bg-white px-3 py-1 text-xs text-zinc-400 ring-1 ring-zinc-900/5 sm:flex">
             <span className="size-1.5 rounded-full bg-emerald-500" />
-            secureattend.app/live-monitor
+            secureattend.app/Dashboard
           </div>
           <div className="ml-auto text-xs font-medium text-zinc-400">
             Station 01 · Live
@@ -179,7 +179,8 @@ function ProductPreview() {
           <aside className="hidden lg:col-span-3 lg:block">
             <div className="space-y-1">
               {[
-                { icon: IconVideo, label: "Live Monitor", active: true },
+                { icon: IconVideo, label: "Dashboard", active: true },
+                { icon: IconVideo, label: "Live Monitor",},
                 { icon: IconClipboardList, label: "Attendance" },
                 { icon: IconUsers, label: "Students" },
                 { icon: IconChartBar, label: "Analytics" },
