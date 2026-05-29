@@ -1,4 +1,5 @@
 export type NavItemId =
+  | "dashboard"
   | "live-monitor"
   | "live-attendance"
   | "attendance-logs"

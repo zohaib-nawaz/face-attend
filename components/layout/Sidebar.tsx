@@ -7,6 +7,7 @@ import {
   IconClipboardList,
   IconCog,
   IconGraduationCap,
+  IconLayoutDashboard,
   IconLogout,
   IconPlus,
   IconSupport,
@@ -22,6 +23,12 @@ type NavItem = Readonly<{
 }>;
 
 const navItems: ReadonlyArray<NavItem> = [
+  {
+    id: "dashboard",
+    label: "Dashboard",
+    icon: <IconLayoutDashboard className="size-5" />,
+    href: "/dashboard",
+  },
   {
     id: "live-monitor",
     label: "Live Monitor",

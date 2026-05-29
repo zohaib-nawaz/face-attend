@@ -113,6 +113,19 @@ export function IconGraduationCap(props: IconProps) {
   );
 }
 
+export function IconLayoutDashboard(props: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="M4 4h6v8H4V4Zm0 12h6v4H4v-4Zm10-12h6v4h-6V4Zm0 8h6v8h-6v-8Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function IconVideo(props: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
